@@ -28,20 +28,6 @@ namespace SocialsScrapeUploader
 
             SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings["English_ChromeProfileDir"], platforms, videosDescription);
 
-            // FOR DEBUGING
-            //Language language = Language.English;
-            //string filesDir = "C:\\Users\\lenovo\\Desktop\\HistoryVideos\\English";
-            //
-            //List<SocialPlatform> platforms = new List<SocialPlatform>() {
-            //        new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_FacebookUrl")]),
-            //        new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_YoutubeUrl")])
-            //    };
-            //
-            //SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_ChromeProfileDir")], platforms, Resources.HistorAITags);
-
-            //Delete video locally
-            FileHelpers.DeleteFilesFromDir(filesDir);
-
             Messages.GeneralMessage("------------- Video uploading completed ------------");
         }
     }
