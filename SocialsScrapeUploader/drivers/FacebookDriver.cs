@@ -46,7 +46,9 @@ namespace SocialsScrapeUploader.drivers
                         seleniumHelpers.SendKeys(By.XPath("//div[contains(@class,'x9f619 x5yr21d x1n2onr6 xh8yej3')]//input[@type='file' and @class='x1s85apg']"), filePath);
                         seleniumHelpers.SendKeys(By.XPath("//div[@aria-label=\"What's on your mind?\"]//p[contains(@class, 'xdj266r')]"), string.Format("{0}\n\n{1}", Path.GetFileNameWithoutExtension(filePath), description));
                         seleniumHelpers.ClickElement(By.XPath("//div[@aria-label='Post'][@role='button']"));
-						seleniumHelpers.WaitUntilNotVisible(By.XPath("//span[contains(text(), 'Posting')]"));
+                        System.Threading.Thread.Sleep(5000);
+                        //seleniumHelpers.WaitUntilNotVisible(By.XPath("//span[contains(text(), 'Posting')]"));
+                        //seleniumHelpers.ClickElement(By.XPath("//div[@role='button' and contains(@class, 'x1ypdohk') and @aria-hidden='false']"));
                     }
 					else
 					{
@@ -55,8 +57,9 @@ namespace SocialsScrapeUploader.drivers
                         seleniumHelpers.ClickElement(By.XPath("//div[@aria-label='Next' and @role='button']"));
                         seleniumHelpers.ClickElement(By.XPath("//div[@aria-label='Next' and @role='button' and @tabindex='0']"));
                         seleniumHelpers.SendKeys(By.XPath("//div[@aria-label=\"Describe your reel...\"]//p[contains(@class, 'xdj266r')]"), string.Format("{0}\n\n{1}", Path.GetFileNameWithoutExtension(filePath), description));
-                        seleniumHelpers.ClickWhenEnabled(Driver.FindElement(By.XPath("/html/body/div[1]/div/div[1]/div/div[5]/div/div/div[3]/form/div/div/div[1]/div/div[4]/div[2]/div[2]/div[1]")));
-                        seleniumHelpers.ClickElement(By.XPath("//html/body/div[1]/div/div[1]/div/div[6]/div/div/div[3]/div[2]/div/div/div[1]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[1]/div/div[1]/div[2]/div"));
+                        // seleniumHelpers.ClickWhenEnabled(Driver.FindElement(By.XPath("//div[@aria-label=\"Publish\" and @tabindex=0]")));
+                        seleniumHelpers.ClickWhenExists(By.XPath("//div[@aria-label=\"Publish\" and @tabindex=0]"));
+                        seleniumHelpers.ClickElement(By.XPath("//div[@role='button'][.//div[@data-video-id]]"));
                         seleniumHelpers.ClickElement(By.XPath("//div[@role='button' and contains(@class, 'x1ypdohk') and @aria-hidden='false']"));
                     }
                 }

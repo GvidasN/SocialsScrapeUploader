@@ -35,7 +35,7 @@ namespace SocialsScrapeUploader.helpers
         public static void RunSocialMediaVideosUpload(string videosDir, string chromeProfileDir, List<SocialPlatform> socialPlatforms, string videoDescription)
         {
             IWebDriver driver = ChromeDriverHelpers.InitiateDrive(chromeProfileDir);
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(10));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(8));
 
             foreach (SocialPlatform platform in socialPlatforms)
             {

@@ -38,13 +38,11 @@ namespace SocialsScrapeUploader.drivers
             string[] files = Directory.GetFiles(videosDirectoryPath, "*.mp4");
             SeleniumHelpers seleniumHelpers = new SeleniumHelpers(Wait);            
 
-            //Initial upload window. Waiting for it to load
-            Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("jsx-3309220042")));
-
             foreach (string filePath in files)
             {
                 try
                 {
+                    //seleniumHelpers.SwitchToIframe(Driver, By.XPath("//iframe"));
                     seleniumHelpers.SendKeys(By.CssSelector("input[type='file'][accept='video/*']"), filePath);
                     seleniumHelpers.SendKeys(By.XPath("//span[@data-text='true']"), $"\n\n{description}");
 

@@ -61,7 +61,7 @@ namespace SocialsScrapeUploader.resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to #AskReddit #CuriousMinds #RedditStories #QuestionOfTheDay #ShareYourThoughts.
+        ///   Looks up a localized string similar to #AskReddit #CuriousMinds #RedditStories #QuestionOfTheDay #ShareYourThoughts #DailyDiscussion #EngageWithUs #TrendingTopics.
         /// </summary>
         internal static string AskRedditTags_English {
             get {

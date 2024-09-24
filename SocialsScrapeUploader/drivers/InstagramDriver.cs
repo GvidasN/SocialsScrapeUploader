@@ -47,7 +47,7 @@ namespace SocialsScrapeUploader.drivers
 			{
 				try
 				{
-					seleniumHelpers.ClickElement(By.XPath("//span[@aria-describedby=':r8:']//a[contains(@class, 'xjbqb8w') and @href='#']"));
+					seleniumHelpers.ClickElement(By.XPath("//a[contains(@class, '_a6hd') and .//span[contains(text(), 'Create')]]"));
 					seleniumHelpers.ClickElement(By.XPath("//a[contains(@class, 'x1i10hfl') and .//span[contains(text(), 'Post')]]"));
 					seleniumHelpers.SendKeys(By.CssSelector("input._ac69[type='file']"), filePath);
 					seleniumHelpers.ClickElement(By.XPath("//div[contains(@class, 'x1i10hfl') and @role='button' and @tabindex='0' and text()='Next']"));

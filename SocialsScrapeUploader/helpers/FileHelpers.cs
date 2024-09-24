@@ -58,7 +58,7 @@ namespace SocialsScrapeUploader.helpers
                 if (!Directory.Exists(directoryPath))
                 {
                     Directory.CreateDirectory(directoryPath);
-                    Messages.GeneralMessage($"Directory '{directoryPath}' cleared.");
+                    Messages.GeneralMessage($"Directory '{directoryPath}' created.");
                 }
             }
             catch (Exception ex)

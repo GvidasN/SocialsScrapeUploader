@@ -4,10 +4,6 @@ using SocialsScrapeUploader.resources;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialsScrapeUploader
 {
@@ -15,36 +11,50 @@ namespace SocialsScrapeUploader
     {
         static void Main(string[] args)
         {
-            Messages.GeneralMessage("-------------Starting video upload to social medias------------");
-
-            if(args[1] == "Reddit")
-            {
-                List<SocialPlatform> platforms = new List<SocialPlatform>
-                {
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Instagram, ConfigurationManager.AppSettings[$"English_InstagramUrl"]),
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[$"English_YoutubeUrl"]),
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[$"English_FacebookUrl"]),
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Tiktok, ConfigurationManager.AppSettings[$"English_TiktokUrl"])
-                };
+            string filesDir = args[0];
+            VideoType videoType = (VideoType)Enum.Parse(typeof(VideoType), args[1]);           
             
-                SocialPlatformsHelpers.RunSocialMediaVideosUpload(args[0], ConfigurationManager.AppSettings["English_ChromeProfileDir"], platforms, Resources.AskRedditTags_English);
-            }
-            else if (args[1] == "History")
+            Messages.GeneralMessage("-------------Starting video upload to social medias------------");
+            
+            if(videoType == VideoType.Reddit)
             {
-                List<SocialPlatform> platforms = new List<SocialPlatform>
-                {
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[$"HistorAI_FacebookUrl"]),
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings["HistorAI_YoutubeUrl"])
-                };
-               
-                SocialPlatformsHelpers.RunSocialMediaVideosUpload(args[0], ConfigurationManager.AppSettings["HistorAI_ChromeProfileDir"], platforms, Resources.HistorAITags);
+               List<SocialPlatform> platforms = new List<SocialPlatform>
+               {
+                   new SocialPlatform(ResourcesSocialPlatformsNames.Instagram, ConfigurationManager.AppSettings[$"English_InstagramUrl"]),
+                   new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[$"English_YoutubeUrl"]),
+                   new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[$"English_FacebookUrl"]),
+                   new SocialPlatform(ResourcesSocialPlatformsNames.Tiktok, ConfigurationManager.AppSettings[$"English_TiktokUrl"])
+               };
+            
+                SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings["English_ChromeProfileDir"], platforms, Resources.AskRedditTags_English);
             }
+            else if (videoType == VideoType.History)
+            {
+                Language language = (Language)Enum.Parse(typeof(Language), args[2]);
+            
+                List<SocialPlatform> platforms = new List<SocialPlatform>() {
+                    new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_FacebookUrl")]),
+                    new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_YoutubeUrl")])
+                };
+                
+                SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_ChromeProfileDir")], platforms, Resources.HistorAITags);
+            }
+
+            // FOR DEBUGING
+            //Language language = Language.English;
+            //string filesDir = "C:\\Users\\lenovo\\Desktop\\HistoryVideos\\English";
+            //
+            //List<SocialPlatform> platforms = new List<SocialPlatform>() {
+            //        new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_FacebookUrl")]),
+            //        new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_YoutubeUrl")])
+            //    };
+            //
+            //SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_ChromeProfileDir")], platforms, Resources.HistorAITags);
 
             //Delete video locally
-            FileHelpers.DeleteFilesFromDir(args[0]);
+            FileHelpers.DeleteFilesFromDir(filesDir);
 
             Messages.GeneralMessage("-------------Video uploading completed------------");
-
         }
     }
 }

@@ -29,6 +29,11 @@ namespace SocialsScrapeUploader.helpers
             Wait.Until(ExpectedConditions.ElementExists(by)).SendKeys(text);
             System.Threading.Thread.Sleep(3000);
         }
+        public void ClickWhenExists(By by)
+        {
+            Wait.Until(ExpectedConditions.ElementExists(by)).Click();
+            System.Threading.Thread.Sleep(3000);
+        }
 
         public void ClickWhenEnabled(IWebElement element)
         {
@@ -57,6 +62,12 @@ namespace SocialsScrapeUploader.helpers
             {
                 return false;
             }
+        }
+
+        public void SwitchToIframe(IWebDriver driver, By by)
+        {
+            var iframeElement = Wait.Until(ExpectedConditions.ElementExists(by));
+            driver.SwitchTo().Frame(iframeElement);
         }
     }
 }
