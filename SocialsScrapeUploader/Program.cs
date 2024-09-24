@@ -11,34 +11,22 @@ namespace SocialsScrapeUploader
     {
         static void Main(string[] args)
         {
-            string filesDir = args[0];
-            VideoType videoType = (VideoType)Enum.Parse(typeof(VideoType), args[1]);           
-            
-            Messages.GeneralMessage("-------------Starting video upload to social medias------------");
-            
-            if(videoType == VideoType.Reddit)
+
+            List<SocialPlatform> platforms = new List<SocialPlatform>
             {
-               List<SocialPlatform> platforms = new List<SocialPlatform>
-               {
-                   new SocialPlatform(ResourcesSocialPlatformsNames.Instagram, ConfigurationManager.AppSettings[$"English_InstagramUrl"]),
-                   new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[$"English_YoutubeUrl"]),
-                   new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[$"English_FacebookUrl"]),
-                   new SocialPlatform(ResourcesSocialPlatformsNames.Tiktok, ConfigurationManager.AppSettings[$"English_TiktokUrl"])
-               };
+                new SocialPlatform(ResourcesSocialPlatformsNames.Instagram, ConfigurationManager.AppSettings[$"InstagramUrl"]),
+                new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[$"YoutubeUrl"]),
+                new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[$"FacebookUrl"]),
+                new SocialPlatform(ResourcesSocialPlatformsNames.Tiktok, ConfigurationManager.AppSettings[$"TiktokUrl"])
+            };
+
+            string filesDir = UserInterface.RetrievePlatformInfo(platforms);
+            string videosDescription = UserInterface.RetrieveUserInput("Please Provide a description for the videos:");
+            platforms.RemoveAll(platform => string.IsNullOrEmpty(platform.LinkToSite));
             
-                SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings["English_ChromeProfileDir"], platforms, Resources.AskRedditTags_English);
-            }
-            else if (videoType == VideoType.History)
-            {
-                Language language = (Language)Enum.Parse(typeof(Language), args[2]);
-            
-                List<SocialPlatform> platforms = new List<SocialPlatform>() {
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Facebook, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_FacebookUrl")]),
-                    new SocialPlatform(ResourcesSocialPlatformsNames.Youtube, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_YoutubeUrl")])
-                };
-                
-                SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings[string.Concat(language, "HistorAI_ChromeProfileDir")], platforms, Resources.HistorAITags);
-            }
+            Messages.GeneralMessage("------------- Starting videos upload ------------");
+
+            SocialPlatformsHelpers.RunSocialMediaVideosUpload(filesDir, ConfigurationManager.AppSettings["English_ChromeProfileDir"], platforms, videosDescription);
 
             // FOR DEBUGING
             //Language language = Language.English;
@@ -54,7 +42,7 @@ namespace SocialsScrapeUploader
             //Delete video locally
             FileHelpers.DeleteFilesFromDir(filesDir);
 
-            Messages.GeneralMessage("-------------Video uploading completed------------");
+            Messages.GeneralMessage("------------- Video uploading completed ------------");
         }
     }
 }

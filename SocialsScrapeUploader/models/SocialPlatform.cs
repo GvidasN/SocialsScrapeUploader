@@ -9,7 +9,7 @@ namespace SocialsScrapeUploader.models
     public class SocialPlatform
     {
         public string Name { get; }
-        public string LinkToSite { get; }
+        public string LinkToSite { get; set; }
 
         public SocialPlatform(string name, string linkToSite)
         {

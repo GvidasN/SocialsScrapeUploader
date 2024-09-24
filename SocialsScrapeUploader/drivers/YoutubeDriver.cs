@@ -65,7 +65,8 @@ namespace SocialsScrapeUploader.drivers
                     //seleniumHelpers.ClickElement(By.XPath("//ytcp-button[contains(@class, 'done-button') and @label='Done']"));
 
                     seleniumHelpers.ClickElement(By.Id("toggle-button"));
-                    seleniumHelpers.SendKeys(By.Id("text-input"), description.Replace(' ', ','));
+                    seleniumHelpers.SendKeys(By.Id("text-input"), description);
+                    //seleniumHelpers.SendKeys(By.Id("text-input"), description.Replace(' ', ',')); FOR TAGS
                     seleniumHelpers.ClickElement(By.Id("step-badge-3"));
                     seleniumHelpers.ClickElement(By.XPath("//tp-yt-paper-radio-button[contains(@class, 'style-scope ytcp-video-visibility-select') and @name='PUBLIC']"));
                     seleniumHelpers.ClickElement(By.Id("done-button"));

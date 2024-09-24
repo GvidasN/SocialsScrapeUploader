@@ -47,7 +47,6 @@ namespace SocialsScrapeUploader.drivers
                     seleniumHelpers.SendKeys(By.XPath("//span[@data-text='true']"), $"\n\n{description}");
 
                     // TEMPORARY SOLUTION TO MAKE THE TAGS ACTIVE
-
                     //if (description.Contains('#'))
                     //{
                     //    List<string> tags = description.Split(' ').ToList();
