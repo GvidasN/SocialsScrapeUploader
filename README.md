@@ -1,6 +1,6 @@
 **Hello!**
 
-This solution was created to help reduce manual work when uploading a video to a social media(s) (Youtube, Facebook, Instagram or TikTok). I did it just for fun and it seems to be working. Everything was done with the help of Selenium library.
+This solution was created to help reduce manual work when uploading a video to a social media(s) (Youtube, Facebook, Instagram or TikTok). I did it just for fun to tackle my own specific use case and it seems to be working. Everything was done with the help of Selenium library.
 
 If you wish to try and use this, some pre-configuration is required:
 
